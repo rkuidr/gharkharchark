@@ -1,0 +1,174 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-a-mobile-first-react-spa-max-width-430px-centered-on-desktop-using-the-specified-color-scheme-primary-0f172a-accent-22c55e-background-f1f5f9-danger-ef4444-card-background-ffffff-text-primary-1e293b-text-secondary-64748b-apply-a-premium-polished-android-app-aesthetic-with-rounded-cards-border-radius-16px-smooth-tab-switch-animations-and-consistent-typography-throughout",
+      "featureTitle": "Implement a mobile-first React SPA (max-width 430px, centered on desktop) using the specified color scheme: Primary #0F172A, Accent #22C55E, Background #F1F5F9, Danger #EF4444, Card Background #FFFFFF, Text Primary #1E293B, Text Secondary #64748B. Apply a premium, polished Android-app aesthetic with rounded cards (border-radius 16px), smooth tab-switch animations, and consistent typography throughout.",
+      "files": [
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-bottom-navigation-bar-with-5-tabs-home-dashboard-calendar-analysis-reports-settings-the-active-tab-should-be-visually-highlighted-with-the-accent-green-color-navigation-must-switch-views-without-page-reload",
+      "featureTitle": "Build a bottom navigation bar with 5 tabs: Home (Dashboard), Calendar, Analysis, Reports, Settings. The active tab should be visually highlighted with the accent green color. Navigation must switch views without page reload.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/BottomNav.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-dashboard-home-tab-with-a-header-showing-gharkharcha-logo-and-namaste-greeting-a-prominent-card-showing-today-s-total-expense-a-card-showing-this-month-s-total-expense-a-budget-remaining-card-green-text-if-under-budget-red-if-over-a-recharts-piechart-showing-category-wise-spending-for-the-current-month-with-legend-a-recent-transactions-list-last-5-entries-where-each-row-shows-category-emoji-icon-name-amount-in-formatted-indian-style-and-date-in-dd-mmm-yyyy-format-and-a-smart-insights-section-with-auto-generated-insight-cards",
+      "featureTitle": "Build the Dashboard (Home) tab with: a header showing 'GharKharcha' logo and 'Namaste! 🙏' greeting; a prominent card showing today's total expense; a card showing this month's total expense; a budget remaining card (green text if under budget, red if over); a Recharts PieChart showing category-wise spending for the current month with legend; a recent transactions list (last 5 entries) where each row shows category emoji icon, name, amount in ₹ formatted Indian style, and date in DD MMM YYYY format; and a Smart Insights section with auto-generated insight cards.",
+      "files": [
+        "frontend/src/components/Dashboard.tsx",
+        "frontend/src/utils/categoryConfig.ts",
+        "frontend/src/utils/formatters.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-a-floating-action-button-fab-on-the-dashboard-bottom-right-green-22c55e-circular-with-icon-that-opens-an-add-expense-bottom-sheet-modal-the-modal-must-include-a-large-amount-input-a-category-dropdown-with-emoji-icons-grocery-rent-electricity-water-gas-emi-school-fees-medical-travel-shopping-other-a-date-picker-defaulting-to-today-payment-mode-pill-buttons-cash-upi-card-bank-an-optional-notes-field-and-a-full-width-green-save-button-the-same-modal-must-support-edit-mode-when-editing-an-existing-expense-pre-filling-all-fields",
+      "featureTitle": "Build a floating action button (FAB) on the Dashboard (bottom-right, green #22C55E, circular with + icon) that opens an Add Expense bottom sheet/modal. The modal must include: a large ₹ amount input; a category dropdown with emoji icons (🛒 Grocery, 🏠 Rent, ⚡ Electricity, 💧 Water, 🔥 Gas, 💳 EMI, 🏫 School Fees, 🏥 Medical, 🚗 Travel, 🛍️ Shopping, 📦 Other); a date picker defaulting to today; payment mode pill buttons (Cash, UPI, Card, Bank); an optional notes field; and a full-width green Save button. The same modal must support Edit mode when editing an existing expense, pre-filling all fields.",
+      "files": [
+        "frontend/src/components/ExpenseModal.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-analysis-tab-with-two-sub-tabs-monthly-and-yearly-monthly-sub-tab-month-year-selector-with-prev-next-arrows-big-total-monthly-expense-number-a-budget-progress-bar-spent-vs-budget-percentage-comparison-with-previous-month-with-up-down-arrow-indicator-a-recharts-piechart-for-category-wise-distribution-a-recharts-barchart-for-daily-spending-trend-across-the-month-top-spending-category-highlight-budget-status-badge-green-under-red-over-yearly-sub-tab-year-selector-recharts-barchart-for-month-wise-totals-jan-dec-total-yearly-expense-average-monthly-expense-highest-spending-month-highlighted-savings-estimate-annual-income-minus-yearly-expense",
+      "featureTitle": "Build the Analysis tab with two sub-tabs: Monthly and Yearly. Monthly sub-tab: month/year selector with prev/next arrows; big total monthly expense number; a budget progress bar (spent vs budget); percentage comparison with previous month with up/down arrow indicator; a Recharts PieChart for category-wise distribution; a Recharts BarChart for daily spending trend across the month; top spending category highlight; budget status badge (green = under, red = over). Yearly sub-tab: year selector; Recharts BarChart for month-wise totals (Jan–Dec); total yearly expense; average monthly expense; highest spending month highlighted; savings estimate (annual income minus yearly expense).",
+      "files": [
+        "frontend/src/components/Analysis.tsx",
+        "frontend/src/utils/analytics.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-reports-tab-with-a-filter-panel-containing-a-from-to-date-range-picker-a-category-multi-select-all-11-categories-a-payment-mode-filter-cash-upi-card-bank-all-below-the-filters-render-a-filtered-results-list-showing-matching-expenses-with-category-icon-name-date-payment-mode-and-amount-show-a-summary-bar-with-total-filtered-amount-and-count-of-transactions-provide-three-export-buttons-pdf-triggers-browser-print-of-the-filtered-list-csv-excel-downloads-a-csv-file-and-share-copies-a-text-summary-to-clipboard",
+      "featureTitle": "Build the Reports tab with a filter panel containing: a from–to date range picker; a category multi-select (all 11 categories); a payment mode filter (Cash, UPI, Card, Bank, All). Below the filters, render a filtered results list showing matching expenses with category icon, name, date, payment mode, and amount. Show a summary bar with total filtered amount and count of transactions. Provide three export buttons: PDF (triggers browser print of the filtered list), CSV/Excel (downloads a .csv file), and Share (copies a text summary to clipboard).",
+      "files": [
+        "frontend/src/components/Reports.tsx",
+        "frontend/src/utils/exportUtils.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-smart-insights-section-rendered-on-the-dashboard-as-a-scrollable-card-section-insights-must-be-dynamically-calculated-and-include-per-category-spend-this-month-in-hindi-style-english-text-e-g-aapne-is-mahine-grocery-par-x-kharch-kiya-category-level-comparison-with-last-month-showing-increase-decrease-a-budget-alert-card-when-80-of-monthly-budget-is-consumed-saving-tip-suggestions-and-a-highest-spending-category-alert-card-each-insight-is-displayed-as-a-distinct-card-with-a-colored-icon",
+      "featureTitle": "Build the Smart Insights section (rendered on the Dashboard as a scrollable card section). Insights must be dynamically calculated and include: per-category spend this month in Hindi-style English text (e.g., 'Aapne is mahine Grocery par ₹X kharch kiya'); category-level comparison with last month showing % increase/decrease; a budget alert card when 80%+ of monthly budget is consumed; saving tip suggestions; and a highest-spending category alert card. Each insight is displayed as a distinct card with a colored icon.",
+      "files": [
+        "frontend/src/utils/insightGenerator.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-settings-tab-with-the-following-functional-sections-monthly-budget-input-save-updates-backend-annual-income-input-save-updates-backend-currency-display-showing-inr-read-only-dark-mode-toggle-that-applies-a-dark-theme-across-the-entire-app-pin-lock-toggle-that-when-enabled-prompts-the-user-to-set-a-4-digit-pin-and-requires-that-pin-on-app-launch-clear-all-data-button-that-shows-a-confirmation-dialog-before-deleting-all-expenses-about-section-showing-app-name-gharkharcha-and-version-1-0-0",
+      "featureTitle": "Build the Settings tab with the following functional sections: Monthly Budget input (₹, save updates backend); Annual Income input (₹, save updates backend); Currency display showing ₹ INR (read-only); Dark Mode toggle that applies a dark theme across the entire app; PIN Lock toggle that, when enabled, prompts the user to set a 4-digit PIN and requires that PIN on app launch; Clear All Data button that shows a confirmation dialog before deleting all expenses; About section showing app name 'GharKharcha' and version '1.0.0'.",
+      "files": [
+        "frontend/src/components/PINLock.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-global-ux-polish-across-the-app-toast-notifications-for-save-update-and-delete-actions-confirmation-dialogs-before-any-destructive-action-delete-expense-clear-all-data-empty-state-messages-with-descriptive-text-when-no-data-exists-for-a-view-indian-rupee-formatting-1-23-456-style-for-all-monetary-values-dd-mmm-yyyy-date-format-throughout-and-loading-states-while-data-is-being-fetched-from-the-backend",
+      "featureTitle": "Implement global UX polish across the app: toast notifications for save, update, and delete actions; confirmation dialogs before any destructive action (delete expense, clear all data); empty state messages with descriptive text when no data exists for a view; Indian Rupee formatting (₹1,23,456 style) for all monetary values; DD MMM YYYY date format throughout; and loading states while data is being fetched from the backend.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/utils/formatters.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

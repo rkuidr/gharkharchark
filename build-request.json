@@ -1,0 +1,334 @@
+{
+  "kind": "build_request",
+  "title": "GharKharcha – Smart Home Expense Tracker",
+  "projectName": "GharKharcha",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create the backend actor in backend/main.mo with stable storage for expenses and settings. Expose CRUD functions: addExpense, updateExpense, deleteExpense, getExpenses, getSettings, updateSettings. Expense record fields: id (Text), amount (Float), category (Text), date (Text), paymentMode (Text), notes (Text), createdAt (Int). Settings record fields: monthlyBudget (Float), annualIncome (Float), darkMode (Bool), pinEnabled (Bool), pin (Text).",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Data Model (localStorage)",
+          "expenses: [{ id, amount, category, date, paymentMode, notes, createdAt }]",
+          "settings: { monthlyBudget, annualIncome, darkMode, pinEnabled, pin }"
+        ]
+      },
+      "acceptanceCriteria": [
+        "addExpense persists a new expense and returns its id",
+        "updateExpense modifies an existing expense by id",
+        "deleteExpense removes an expense by id",
+        "getExpenses returns all stored expenses",
+        "getSettings returns the current settings object",
+        "updateSettings persists updated settings fields"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Pre-populate the backend with 3 months of realistic sample data for an Indian middle-class family covering January, February, and March 2026. Include all categories (Grocery, Rent, Electricity, Water, Gas, EMI, School Fees, Medical, Travel, Shopping, Other) with monthly totals ranging ₹18,000–₹28,000. This seed data should be inserted once on first deploy if no expenses exist.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Pre-populate with 3 months of realistic sample data for an Indian middle-class family",
+          "Monthly expenses ranging ₹18,000–₹28,000",
+          "Include all categories"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On first load with empty storage, expenses for Jan–Mar 2026 are present",
+        "All 11 categories appear in the sample data",
+        "Monthly totals fall within the ₹18,000–₹28,000 range",
+        "Seed is not re-inserted on subsequent canister restarts"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement a mobile-first React SPA (max-width 430px, centered on desktop) using the specified color scheme: Primary #0F172A, Accent #22C55E, Background #F1F5F9, Danger #EF4444, Card Background #FFFFFF, Text Primary #1E293B, Text Secondary #64748B. Apply a premium, polished Android-app aesthetic with rounded cards (border-radius 16px), smooth tab-switch animations, and consistent typography throughout.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "mobile-first, max-width 430px centered on desktop",
+          "Rounded cards (border-radius: 16px)",
+          "Smooth animations for tab switching",
+          "The app should look premium and polished"
+        ]
+      },
+      "acceptanceCriteria": [
+        "App container is max 430px wide and centered on desktop screens",
+        "All specified hex colors are applied correctly across components",
+        "Cards have 16px border radius",
+        "Tab switching has a visible smooth transition animation",
+        "Layout is fully usable on a 375px-wide mobile viewport"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Build a bottom navigation bar with 5 tabs: Home (Dashboard), Calendar, Analysis, Reports, Settings. The active tab should be visually highlighted with the accent green color. Navigation must switch views without page reload.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "App Structure – Bottom Navigation with 5 tabs: Home, Calendar, Analysis, Reports, Settings"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All 5 tabs are visible in the bottom nav bar",
+        "Active tab icon and label are highlighted in #22C55E",
+        "Tapping each tab renders the corresponding screen",
+        "No page reload occurs when switching tabs"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Build the Dashboard (Home) tab with: a header showing 'GharKharcha' logo and 'Namaste! 🙏' greeting; a prominent card showing today's total expense; a card showing this month's total expense; a budget remaining card (green text if under budget, red if over); a Recharts PieChart showing category-wise spending for the current month with legend; a recent transactions list (last 5 entries) where each row shows category emoji icon, name, amount in ₹ formatted Indian style, and date in DD MMM YYYY format; and a Smart Insights section with auto-generated insight cards.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Screen 1: Dashboard (Home)",
+          "Today's total expense card",
+          "This month's total expense card",
+          "Remaining budget card",
+          "Pie chart: category-wise spending this month",
+          "Recent transactions list (last 5)",
+          "Smart Insights"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Today's expense total updates when new expenses are added for today",
+        "Month total and budget remaining cards reflect real data",
+        "Budget remaining card text is green when under budget and red when over",
+        "Pie chart renders with real category-wise data using Recharts",
+        "Last 5 transactions are listed with correct category icon, name, ₹ amount, and DD MMM YYYY date",
+        "Smart Insights cards are dynamically generated from actual expense data"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Build a floating action button (FAB) on the Dashboard (bottom-right, green #22C55E, circular with + icon) that opens an Add Expense bottom sheet/modal. The modal must include: a large ₹ amount input; a category dropdown with emoji icons (🛒 Grocery, 🏠 Rent, ⚡ Electricity, 💧 Water, 🔥 Gas, 💳 EMI, 🏫 School Fees, 🏥 Medical, 🚗 Travel, 🛍️ Shopping, 📦 Other); a date picker defaulting to today; payment mode pill buttons (Cash, UPI, Card, Bank); an optional notes field; and a full-width green Save button. The same modal must support Edit mode when editing an existing expense, pre-filling all fields.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Quick '+ Add Expense' floating action button (green, bottom right)",
+          "Screen 2: Add Expense (Modal/Sheet triggered by FAB)",
+          "Also support Edit mode when editing existing expense"
+        ]
+      },
+      "acceptanceCriteria": [
+        "FAB is visible on the Dashboard screen, fixed bottom-right, green and circular",
+        "Tapping FAB opens the Add Expense modal/bottom sheet",
+        "All 11 categories appear in the dropdown with their emoji icons",
+        "Date picker defaults to today's date",
+        "Payment mode pill buttons are mutually exclusive and visually indicate selection",
+        "Saving a new expense closes the modal, shows a toast notification, and updates all data views",
+        "Edit mode pre-fills all fields with the selected expense's existing values",
+        "Editing and saving updates the expense and reflects changes immediately"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Build the Calendar tab with a monthly grid calendar. Each date cell displays the date number and, below it, the total expense for that day in small text (highlighted if non-zero). Clicking any date opens a bottom sheet/panel showing: the date heading in DD MMM YYYY format, total for that day, and a list of all expenses for that day. Each expense item in the list shows category emoji, name, payment mode, ₹ amount, and Edit/Delete action buttons. The calendar must have prev/next month navigation arrows.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Screen 3: Calendar (Daily Expense View)",
+          "Monthly calendar grid",
+          "Each date cell shows total expense for that day",
+          "Click any date → show a bottom sheet/panel",
+          "Each item: category icon + name + payment mode + amount + edit/delete buttons"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Calendar renders a full monthly grid for the current month",
+        "Date cells with expenses show the daily total amount below the date number",
+        "Dates with expenses are visually highlighted",
+        "Clicking a date opens a bottom sheet with that day's expense list",
+        "Each expense row in the day sheet has category emoji, name, payment mode, amount, and edit/delete buttons",
+        "Edit button opens the Add/Edit modal pre-filled with that expense",
+        "Delete button shows a confirmation dialog before deleting",
+        "Prev/next arrows navigate to adjacent months"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Build the Analysis tab with two sub-tabs: Monthly and Yearly. Monthly sub-tab: month/year selector with prev/next arrows; big total monthly expense number; a budget progress bar (spent vs budget); percentage comparison with previous month with up/down arrow indicator; a Recharts PieChart for category-wise distribution; a Recharts BarChart for daily spending trend across the month; top spending category highlight; budget status badge (green = under, red = over). Yearly sub-tab: year selector; Recharts BarChart for month-wise totals (Jan–Dec); total yearly expense; average monthly expense; highest spending month highlighted; savings estimate (annual income minus yearly expense).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Screen 4: Analysis",
+          "Monthly Analysis Tab",
+          "Yearly Analysis Tab",
+          "Pie chart: category-wise distribution",
+          "Bar chart: daily spending trend for the month",
+          "Bar chart: month-wise total expenses (Jan–Dec)",
+          "Savings estimation (annual income from settings – yearly expense)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Monthly/Yearly sub-tabs switch correctly",
+        "Month selector changes the displayed month's data",
+        "Budget progress bar reflects spent vs monthly budget",
+        "Month-over-month comparison shows correct % change with directional arrow",
+        "Pie chart renders real category data for selected month",
+        "Daily bar chart renders each day of the selected month",
+        "Year selector changes the displayed year's data",
+        "Monthly bar chart renders 12 bars (Jan–Dec) for the selected year",
+        "Highest spending month is visually highlighted",
+        "Savings estimate = annualIncome − yearly total expense"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Build the Reports tab with a filter panel containing: a from–to date range picker; a category multi-select (all 11 categories); a payment mode filter (Cash, UPI, Card, Bank, All). Below the filters, render a filtered results list showing matching expenses with category icon, name, date, payment mode, and amount. Show a summary bar with total filtered amount and count of transactions. Provide three export buttons: PDF (triggers browser print of the filtered list), CSV/Excel (downloads a .csv file), and Share (copies a text summary to clipboard).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Screen 5: Reports",
+          "Filter panel",
+          "Date range picker (from – to)",
+          "Category multi-select",
+          "Payment mode filter",
+          "Export buttons: PDF (print), Excel/CSV (download), Share (copy text)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Date range filter correctly limits results to the selected range",
+        "Category multi-select filters expenses to only selected categories",
+        "Payment mode filter works independently and in combination with other filters",
+        "Filtered list updates immediately when filters change",
+        "Summary shows correct total amount and transaction count for current filter",
+        "PDF button triggers browser print dialog",
+        "CSV button downloads a valid .csv file with expense data",
+        "Share button copies a readable text summary to the clipboard and shows a toast"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Build the Smart Insights section (rendered on the Dashboard as a scrollable card section). Insights must be dynamically calculated and include: per-category spend this month in Hindi-style English text (e.g., 'Aapne is mahine Grocery par ₹X kharch kiya'); category-level comparison with last month showing % increase/decrease; a budget alert card when 80%+ of monthly budget is consumed; saving tip suggestions; and a highest-spending category alert card. Each insight is displayed as a distinct card with a colored icon.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Screen 6: Smart Insights",
+          "Aapne is mahine Grocery par ₹X kharch kiya",
+          "Shopping par 18% zyada kharch kiya pichle mahine se",
+          "Budget alert: 'Budget ka 80% use ho gaya!'",
+          "Show as cards with colored icons"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Insight cards are rendered on the Dashboard below recent transactions",
+        "Category spend insights show real calculated amounts",
+        "Month-over-month category comparisons display correct % change",
+        "Budget alert card appears only when ≥80% of monthly budget is spent",
+        "Highest spending category card shows the correct category name and amount",
+        "All insight values update when expense data changes"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Build the Settings tab with the following functional sections: Monthly Budget input (₹, save updates backend); Annual Income input (₹, save updates backend); Currency display showing ₹ INR (read-only); Dark Mode toggle that applies a dark theme across the entire app; PIN Lock toggle that, when enabled, prompts the user to set a 4-digit PIN and requires that PIN on app launch; Clear All Data button that shows a confirmation dialog before deleting all expenses; About section showing app name 'GharKharcha' and version '1.0.0'.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Screen 7: Settings",
+          "Monthly budget setting",
+          "Annual income setting",
+          "App lock toggle (PIN – simulate with simple PIN entry)",
+          "Data management: Clear all data button (with confirmation)",
+          "Dark mode toggle"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Saving monthly budget updates the value used in Analysis and Dashboard budget cards",
+        "Saving annual income updates the savings estimate in Yearly Analysis",
+        "Dark mode toggle switches the app color theme to dark variant and persists across sessions",
+        "PIN lock toggle prompts for PIN setup when enabled",
+        "On app launch with PIN enabled, a PIN entry screen blocks access until correct PIN is entered",
+        "Clear All Data shows a confirmation dialog and, on confirm, removes all expenses",
+        "About section displays app name and version 1.0.0"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Implement global UX polish across the app: toast notifications for save, update, and delete actions; confirmation dialogs before any destructive action (delete expense, clear all data); empty state messages with descriptive text when no data exists for a view; Indian Rupee formatting (₹1,23,456 style) for all monetary values; DD MMM YYYY date format throughout; and loading states while data is being fetched from the backend.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Toast notifications for save/delete actions",
+          "Confirmation dialog for delete",
+          "Empty states with illustration text",
+          "All amounts in Indian Rupee format (₹1,23,456)",
+          "Dates in Indian format (DD MMM YYYY)",
+          "Loading states"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A toast appears after saving, editing, or deleting any expense",
+        "A confirmation dialog appears before delete and clear-all actions",
+        "Empty state text is shown when a list or chart has no data",
+        "All currency values use Indian number formatting (e.g., ₹1,23,456)",
+        "All dates are displayed as DD MMM YYYY (e.g., 02 Mar 2026)",
+        "A loading indicator is shown while backend calls are in progress"
+      ]
+    }
+  ],
+  "constraints": [
+    "All monetary values must use Indian Rupee formatting: ₹1,23,456 (lakh/crore grouping)",
+    "All dates must be displayed in DD MMM YYYY format",
+    "Recharts must be used for all charts (PieChart and BarChart)",
+    "App container max-width must be 430px, centered on desktop",
+    "Color palette must strictly follow: Primary #0F172A, Accent #22C55E, Background #F1F5F9, Danger #EF4444, Card #FFFFFF, Text #1E293B / #64748B",
+    "Do not edit any files listed in frontend.immutablePaths",
+    "All 11 expense categories must be supported throughout the app"
+  ],
+  "nonGoals": [
+    "Multi-user or family member accounts",
+    "Cloud sync or external database integration",
+    "Bank account or UPI app integration",
+    "Push notifications or reminders",
+    "Currency conversion or multi-currency support",
+    "Receipt photo upload",
+    "Recurring expense automation"
+  ],
+  "imageRequirements": {
+    "required": [
+      "App icon logo for GharKharcha: a stylized house outline with a rupee symbol inside, on a dark blue (#0F172A) rounded square background with green accent (#22C55E) details (gharkharcha-logo.dim_128x128.png)"
+    ],
+    "edits": []
+  }
+}

@@ -1,0 +1,315 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "GharKharcha – Smart Home Expense Tracker Frontend Implementation",
+  "requirements": [
+    {
+      "id": "REQ-3",
+      "summary": "Implement mobile-first design system with Indian home expense tracker aesthetic",
+      "acceptanceCriteria": [
+        "App container is max 430px wide and centered on desktop screens",
+        "All specified hex colors are applied correctly across components",
+        "Cards have 16px border radius",
+        "Tab switching has a visible smooth transition animation",
+        "Layout is fully usable on a 375px-wide mobile viewport"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Update global styles to include the complete GharKharcha color scheme (Primary #0F172A, Accent #22C55E, Background #F1F5F9, Danger #EF4444, Card #FFFFFF, Text Primary #1E293B, Text Secondary #64748B) as CSS custom properties. Add base styles for the mobile-first container (max-width 430px, centered). Define card styling with 16px border-radius. Set up smooth transition utilities for tab animations."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme to include GharKharcha color palette as named colors (primary, accent, background, danger, card, textPrimary, textSecondary). Configure custom border-radius values. Add animation utilities for smooth tab transitions. Ensure mobile-first breakpoints are properly configured."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Build bottom navigation bar with 5 tabs for client-side routing",
+      "acceptanceCriteria": [
+        "All 5 tabs are visible in the bottom nav bar",
+        "Active tab icon and label are highlighted in #22C55E",
+        "Tapping each tab renders the corresponding screen",
+        "No page reload occurs when switching tabs"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/BottomNav.tsx",
+          "operation": "create",
+          "description": "Create a fixed bottom navigation component with 5 tabs: Home (Dashboard), Calendar, Analysis, Reports, Settings. Each tab includes an icon and label. Implement active state highlighting using accent green (#22C55E). Use React state to track active tab and emit tab change events. Apply smooth transition animations when switching between tabs."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the BottomNav component into the main app layout. Implement client-side routing logic to switch between the 5 main views (Dashboard, Calendar, Analysis, Reports, Settings) based on active tab state. Ensure the app container has max-width 430px and is centered on desktop. Set up the view transition animation system."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Build Dashboard (Home) tab with expense overview, charts, and smart insights",
+      "acceptanceCriteria": [
+        "Today's expense total updates when new expenses are added for today",
+        "Month total and budget remaining cards reflect real data",
+        "Budget remaining card text is green when under budget and red when over",
+        "Pie chart renders with real category-wise data using Recharts",
+        "Last 5 transactions are listed with correct category icon, name, ₹ amount, and DD MMM YYYY date",
+        "Smart Insights cards are dynamically generated from actual expense data"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Dashboard.tsx",
+          "operation": "create",
+          "description": "Create the Dashboard view component with header showing 'GharKharcha' logo (referencing the generated image at frontend/public/assets/generated/gharkharcha-logo.dim_128x128.png) and 'Namaste! 🙏' greeting. Include cards for today's total, month's total, and budget remaining (with conditional green/red coloring). Integrate Recharts PieChart for category-wise spending. Add recent transactions list (last 5 entries) with category emoji icons, names, Indian Rupee formatted amounts, and DD MMM YYYY dates. Include Smart Insights section as a scrollable card area. Fetch expense and settings data from backend using the backendInterface methods getExpenses() and getSettings()."
+        },
+        {
+          "path": "frontend/src/hooks/useExpenses.ts",
+          "operation": "create",
+          "description": "Create a custom React hook to manage expense data fetching, caching, and state management. Implement methods to call backend getExpenses() and transform the data for frontend use. Include derived calculations for today's total, month's total, and category aggregations. Handle loading and error states."
+        },
+        {
+          "path": "frontend/src/hooks/useSettings.tsx",
+          "operation": "create",
+          "description": "Create a custom React hook to manage settings data. Fetch settings using backend getSettings() method. Provide state for monthlyBudget, annualIncome, darkMode, pinEnabled, and pin. Include update function that calls backend updateSettings(). Handle loading states and cache settings data."
+        },
+        {
+          "path": "frontend/src/utils/formatters.ts",
+          "operation": "create",
+          "description": "Create utility functions for Indian Rupee formatting (₹1,23,456 style with lakh/crore grouping) and DD MMM YYYY date formatting. Include functions to parse and format dates, calculate month boundaries, and perform timezone-safe date operations."
+        },
+        {
+          "path": "frontend/src/utils/categoryConfig.ts",
+          "operation": "create",
+          "description": "Define the complete category configuration with all 11 categories: Grocery (🛒), Rent (🏠), Electricity (⚡), Water (💧), Gas (🔥), EMI (💳), School Fees (🏫), Medical (🏥), Travel (🚗), Shopping (🛍️), Other (📦). Export category names, emoji icons, and color mappings for use across all components."
+        },
+        {
+          "path": "frontend/src/components/SmartInsights.tsx",
+          "operation": "create",
+          "description": "Create the Smart Insights component that dynamically generates insight cards from expense data. Calculate per-category spending for current month, month-over-month comparisons with percentage changes, budget alert when ≥80% consumed, highest spending category, and saving tips. Display each insight as a colored card with icon. Use Hindi-style English text patterns (e.g., 'Aapne is mahine Grocery par ₹X kharch kiya')."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Build floating action button and Add/Edit Expense modal",
+      "acceptanceCriteria": [
+        "FAB is visible on the Dashboard screen, fixed bottom-right, green and circular",
+        "Tapping FAB opens the Add Expense modal/bottom sheet",
+        "All 11 categories appear in the dropdown with their emoji icons",
+        "Date picker defaults to today's date",
+        "Payment mode pill buttons are mutually exclusive and visually indicate selection",
+        "Saving a new expense closes the modal, shows a toast notification, and updates all data views",
+        "Edit mode pre-fills all fields with the selected expense's existing values",
+        "Editing and saving updates the expense and reflects changes immediately"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/FAB.tsx",
+          "operation": "create",
+          "description": "Create a floating action button component styled as a circular green (#22C55E) button with a + icon. Position fixed at bottom-right. On click, trigger the Add Expense modal to open. Ensure the FAB is only visible on the Dashboard tab."
+        },
+        {
+          "path": "frontend/src/components/ExpenseModal.tsx",
+          "operation": "create",
+          "description": "Create a bottom sheet/modal component for adding and editing expenses. Include: large ₹ amount input field, category dropdown with all 11 categories and emoji icons, date picker defaulting to today, payment mode pill buttons (Cash, UPI, Card, Bank) with mutually exclusive selection, optional notes textarea, and full-width green Save button. Support both Add mode (empty fields) and Edit mode (pre-filled fields). On save, call backend addExpense() for new or updateExpense() for existing expense. Show toast notification on success. Close modal and refresh expense data after save."
+        },
+        {
+          "path": "frontend/src/components/ui/toast.tsx",
+          "operation": "create",
+          "description": "Create a toast notification component for displaying save, update, and delete success/error messages. Position toasts at top-center with auto-dismiss after 3 seconds. Support different toast types (success, error, info) with appropriate colors."
+        },
+        {
+          "path": "frontend/src/hooks/useToast.ts",
+          "operation": "create",
+          "description": "Create a custom hook to manage toast state and provide imperative toast.show() and toast.hide() methods. Handle toast queue if multiple toasts are triggered simultaneously."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Build Calendar tab with monthly grid and day detail view",
+      "acceptanceCriteria": [
+        "Calendar renders a full monthly grid for the current month",
+        "Date cells with expenses show the daily total amount below the date number",
+        "Dates with expenses are visually highlighted",
+        "Clicking a date opens a bottom sheet with that day's expense list",
+        "Each expense row in the day sheet has category emoji, name, payment mode, amount, and edit/delete buttons",
+        "Edit button opens the Add/Edit modal pre-filled with that expense",
+        "Delete button shows a confirmation dialog before deleting",
+        "Prev/next arrows navigate to adjacent months"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Calendar.tsx",
+          "operation": "create",
+          "description": "Create the Calendar view component with a monthly grid calendar. Render date cells for the current month, showing date number and daily total expense amount below (highlighted if non-zero). Add prev/next month navigation arrows in the header. Implement click handler on date cells to open the DayDetailSheet component. Calculate daily totals by aggregating expenses from backend data."
+        },
+        {
+          "path": "frontend/src/components/DayDetailSheet.tsx",
+          "operation": "create",
+          "description": "Create a bottom sheet component that displays all expenses for a selected date. Show date heading in DD MMM YYYY format, total for the day, and a list of expense items. Each item row includes category emoji, name, payment mode, ₹ formatted amount, and Edit/Delete action buttons. Wire Edit button to open ExpenseModal in edit mode with pre-filled data. Wire Delete button to show confirmation dialog before calling backend deleteExpense()."
+        },
+        {
+          "path": "frontend/src/components/ui/ConfirmDialog.tsx",
+          "operation": "create",
+          "description": "Create a reusable confirmation dialog component for destructive actions (delete expense, clear all data). Display title, message, and Cancel/Confirm buttons. Confirm button should be styled with danger color (#EF4444)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Build Analysis tab with Monthly and Yearly sub-tabs",
+      "acceptanceCriteria": [
+        "Monthly/Yearly sub-tabs switch correctly",
+        "Month selector changes the displayed month's data",
+        "Budget progress bar reflects spent vs monthly budget",
+        "Month-over-month comparison shows correct % change with directional arrow",
+        "Pie chart renders real category data for selected month",
+        "Daily bar chart renders each day of the selected month",
+        "Year selector changes the displayed year's data",
+        "Monthly bar chart renders 12 bars (Jan–Dec) for the selected year",
+        "Highest spending month is visually highlighted",
+        "Savings estimate = annualIncome − yearly total expense"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Analysis.tsx",
+          "operation": "create",
+          "description": "Create the Analysis view component with Monthly and Yearly sub-tabs. Implement tab switching UI. Render MonthlyAnalysis and YearlyAnalysis child components based on active sub-tab. Use smooth transition animations when switching between sub-tabs."
+        },
+        {
+          "path": "frontend/src/components/MonthlyAnalysis.tsx",
+          "operation": "create",
+          "description": "Create Monthly Analysis component with month/year selector (prev/next arrows). Display total monthly expense number, budget progress bar (spent vs budget from settings), percentage comparison with previous month (with up/down arrow indicator), Recharts PieChart for category-wise distribution, Recharts BarChart for daily spending trend across the selected month, top spending category highlight, and budget status badge (green if under, red if over budget). Calculate all metrics from filtered expense data."
+        },
+        {
+          "path": "frontend/src/components/YearlyAnalysis.tsx",
+          "operation": "create",
+          "description": "Create Yearly Analysis component with year selector. Display Recharts BarChart showing month-wise totals (Jan–Dec) for the selected year. Show total yearly expense, average monthly expense, highlight highest spending month visually, and calculate savings estimate (annualIncome from settings minus total yearly expense). All calculations derived from filtered backend expense data."
+        },
+        {
+          "path": "frontend/src/utils/analytics.ts",
+          "operation": "create",
+          "description": "Create utility functions for analytics calculations: aggregate expenses by category, calculate daily totals, compute month-over-month percentage changes, find top spending categories, calculate budget utilization percentage, and aggregate yearly totals by month. Include functions to prepare data in Recharts-compatible format."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Build Reports tab with filtering and export capabilities",
+      "acceptanceCriteria": [
+        "Date range filter correctly limits results to the selected range",
+        "Category multi-select filters expenses to only selected categories",
+        "Payment mode filter works independently and in combination with other filters",
+        "Filtered list updates immediately when filters change",
+        "Summary shows correct total amount and transaction count for current filter",
+        "PDF button triggers browser print dialog",
+        "CSV button downloads a valid .csv file with expense data",
+        "Share button copies a readable text summary to the clipboard and shows a toast"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Reports.tsx",
+          "operation": "create",
+          "description": "Create the Reports view component with a filter panel containing date range picker (from–to), category multi-select (all 11 categories), and payment mode filter (Cash, UPI, Card, Bank, All). Display filtered results list showing matching expenses with category icon, name, date, payment mode, and ₹ amount. Show summary bar with total filtered amount and transaction count. Include three export buttons: PDF (triggers window.print()), CSV/Excel (generates and downloads .csv file), and Share (copies text summary to clipboard using navigator.clipboard API and shows toast). Apply all filters client-side on fetched expense data."
+        },
+        {
+          "path": "frontend/src/utils/exportUtils.ts",
+          "operation": "create",
+          "description": "Create utility functions for exporting report data: generateCSV() to convert filtered expense array to CSV format, triggerDownload() to create a blob and download link, formatTextSummary() to generate a readable text summary of filtered expenses, and copyToClipboard() wrapper for the Clipboard API."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Implement dynamic Smart Insights generation on Dashboard",
+      "acceptanceCriteria": [
+        "Insight cards are rendered on the Dashboard below recent transactions",
+        "Category spend insights show real calculated amounts",
+        "Month-over-month category comparisons display correct % change",
+        "Budget alert card appears only when ≥80% of monthly budget is spent",
+        "Highest spending category card shows the correct category name and amount",
+        "All insight values update when expense data changes"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/insightGenerator.ts",
+          "operation": "create",
+          "description": "Create utility functions to generate dynamic insight data from expense and settings data. Implement logic for: per-category spend calculation with Hindi-style English text generation (e.g., 'Aapne is mahine Grocery par ₹X kharch kiya'), category-level month-over-month comparison with % increase/decrease, budget alert detection (when spent ≥80% of monthly budget), saving tip suggestions based on spending patterns, and highest spending category identification. Return an array of insight objects with text, icon, and color properties."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Build Settings tab with app configuration options",
+      "acceptanceCriteria": [
+        "Saving monthly budget updates the value used in Analysis and Dashboard budget cards",
+        "Saving annual income updates the savings estimate in Yearly Analysis",
+        "Dark mode toggle switches the app color theme to dark variant and persists across sessions",
+        "PIN lock toggle prompts for PIN setup when enabled",
+        "On app launch with PIN enabled, a PIN entry screen blocks access until correct PIN is entered",
+        "Clear All Data shows a confirmation dialog and, on confirm, removes all expenses",
+        "About section displays app name and version 1.0.0"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Settings.tsx",
+          "operation": "create",
+          "description": "Create the Settings view component with sections for: Monthly Budget input (₹, saves to backend via updateSettings()), Annual Income input (₹, saves to backend), Currency display (read-only ₹ INR), Dark Mode toggle (applies theme and saves to settings), PIN Lock toggle (prompts for 4-digit PIN setup when enabled, saves to settings), Clear All Data button (shows confirmation dialog, then iterates through all expenses calling deleteExpense() for each), and About section showing 'GharKharcha' and version '1.0.0'. All input changes should debounce and call backend updateSettings() with updated Settings object."
+        },
+        {
+          "path": "frontend/src/components/PINSetup.tsx",
+          "operation": "create",
+          "description": "Create a modal component for setting up a 4-digit PIN. Display a numeric keypad for PIN entry and confirmation. Validate that both entries match before saving to settings via updateSettings()."
+        },
+        {
+          "path": "frontend/src/components/PINLock.tsx",
+          "operation": "create",
+          "description": "Create a full-screen PIN entry lock screen that blocks app access when PIN is enabled in settings. Display numeric keypad for 4-digit PIN entry. Validate entered PIN against stored settings.pin. On successful entry, unlock the app and reveal the main interface. This component should be rendered at the app root level when settings.pinEnabled is true and user has not yet authenticated."
+        },
+        {
+          "path": "frontend/src/hooks/useDarkMode.ts",
+          "operation": "create",
+          "description": "Create a custom hook to manage dark mode state. Apply dark theme by toggling CSS classes or custom properties on document root. Sync dark mode state with settings from backend. Persist dark mode preference across sessions."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Implement global UX polish and formatting standards",
+      "acceptanceCriteria": [
+        "A toast appears after saving, editing, or deleting any expense",
+        "A confirmation dialog appears before delete and clear-all actions",
+        "Empty state text is shown when a list or chart has no data",
+        "All currency values use Indian number formatting (e.g., ₹1,23,456)",
+        "All dates are displayed as DD MMM YYYY (e.g., 02 Mar 2026)",
+        "A loading indicator is shown while backend calls are in progress"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ui/LoadingSpinner.tsx",
+          "operation": "create",
+          "description": "Create a loading spinner component to display during backend data fetches. Use accent green (#22C55E) color. Support different sizes (small, medium, large)."
+        },
+        {
+          "path": "frontend/src/components/ui/EmptyState.tsx",
+          "operation": "create",
+          "description": "Create a reusable empty state component to display when lists or charts have no data. Accept props for custom icon, title, and description text. Style consistently with the app's design system."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the PINLock component at the app root level to conditionally render based on settings.pinEnabled and authentication state. Integrate the toast provider context. Add global loading state management for backend calls. Ensure all views properly handle loading and empty states."
+        },
+        {
+          "path": "frontend/src/utils/formatters.ts",
+          "operation": "modify",
+          "description": "Ensure all formatting utility functions (Indian Rupee format with lakh/crore grouping, DD MMM YYYY date format) are complete and used consistently across all components. Add edge case handling for null/undefined values."
+        }
+      ]
+    }
+  ]
+}

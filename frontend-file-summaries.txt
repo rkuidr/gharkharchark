@@ -1,0 +1,3 @@
+{
+  "frontend/src/App.tsx": "Main application component that orchestrates all tabs (Home, Calendar, Analysis, Reports, Settings), manages global state for active tab, expense modal, PIN lock, and dark mode, and wraps everything in the ToastProvider context."
+}

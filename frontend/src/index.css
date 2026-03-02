@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 1rem;
+
+    /* GharKharcha Color System */
+    --background: 0.957 0.008 247.858;
+    --foreground: 0.18 0.025 264.182;
+    --card: 1 0 0;
+    --card-foreground: 0.18 0.025 264.182;
+    --popover: 1 0 0;
+    --popover-foreground: 0.18 0.025 264.182;
+    --primary: 0.18 0.04 264.182;
+    --primary-foreground: 1 0 0;
+    --secondary: 0.957 0.008 247.858;
+    --secondary-foreground: 0.18 0.025 264.182;
+    --muted: 0.94 0.01 247.858;
+    --muted-foreground: 0.52 0.02 247.858;
+    --accent: 0.72 0.19 145.5;
+    --accent-foreground: 1 0 0;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 1 0 0;
+    --border: 0.9 0.01 247.858;
+    --input: 0.9 0.01 247.858;
+    --ring: 0.72 0.19 145.5;
+
+    /* App-specific tokens */
+    --app-primary: #0F172A;
+    --app-accent: #22C55E;
+    --app-bg: #F1F5F9;
+    --app-danger: #EF4444;
+    --app-card: #FFFFFF;
+    --app-text: #1E293B;
+    --app-text-secondary: #64748B;
+
+    --chart-1: 0.72 0.19 145.5;
+    --chart-2: 0.65 0.18 264.182;
+    --chart-3: 0.75 0.18 55;
+    --chart-4: 0.65 0.22 27.325;
+    --chart-5: 0.7 0.15 200;
+    --sidebar: 0.957 0.008 247.858;
+    --sidebar-foreground: 0.18 0.025 264.182;
+    --sidebar-primary: 0.18 0.04 264.182;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.94 0.01 247.858;
+    --sidebar-accent-foreground: 0.18 0.025 264.182;
+    --sidebar-border: 0.9 0.01 247.858;
+    --sidebar-ring: 0.72 0.19 145.5;
+  }
+
+  .dark {
+    --background: 0.13 0.025 264.182;
+    --foreground: 0.95 0.005 247.858;
+    --card: 0.18 0.03 264.182;
+    --card-foreground: 0.95 0.005 247.858;
+    --popover: 0.22 0.03 264.182;
+    --popover-foreground: 0.95 0.005 247.858;
+    --primary: 0.95 0.005 247.858;
+    --primary-foreground: 0.18 0.03 264.182;
+    --secondary: 0.22 0.03 264.182;
+    --secondary-foreground: 0.95 0.005 247.858;
+    --muted: 0.22 0.03 264.182;
+    --muted-foreground: 0.6 0.015 247.858;
+    --accent: 0.72 0.19 145.5;
+    --accent-foreground: 1 0 0;
+    --destructive: 0.65 0.22 27.325;
+    --destructive-foreground: 1 0 0;
+    --border: 1 0 0 / 12%;
+    --input: 1 0 0 / 15%;
+    --ring: 0.72 0.19 145.5;
+
+    --app-primary: #1E293B;
+    --app-accent: #22C55E;
+    --app-bg: #0F172A;
+    --app-danger: #EF4444;
+    --app-card: #1E293B;
+    --app-text: #F1F5F9;
+    --app-text-secondary: #94A3B8;
+
+    --chart-1: 0.72 0.19 145.5;
+    --chart-2: 0.65 0.18 264.182;
+    --chart-3: 0.75 0.18 55;
+    --chart-4: 0.65 0.22 27.325;
+    --chart-5: 0.7 0.15 200;
+    --sidebar: 0.18 0.03 264.182;
+    --sidebar-foreground: 0.95 0.005 247.858;
+    --sidebar-primary: 0.72 0.19 145.5;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.22 0.03 264.182;
+    --sidebar-accent-foreground: 0.95 0.005 247.858;
+    --sidebar-border: 1 0 0 / 12%;
+    --sidebar-ring: 0.72 0.19 145.5;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer utilities {
+  .app-container {
+    max-width: 430px;
+    margin: 0 auto;
+    min-height: 100dvh;
+    position: relative;
+    background: var(--app-bg);
+  }
+
+  .dark .app-container {
+    background: var(--app-bg);
+  }
+
+  .tab-content {
+    animation: fadeSlideIn 0.2s ease-out;
+  }
+
+  @keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .bottom-sheet-overlay {
+    animation: overlayFadeIn 0.2s ease-out;
+  }
+
+  @keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .bottom-sheet-content {
+    animation: sheetSlideUp 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  @keyframes sheetSlideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .toast-enter {
+    animation: toastSlideDown 0.3s ease-out;
+  }
+
+  @keyframes toastSlideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
