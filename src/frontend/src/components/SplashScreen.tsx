@@ -47,9 +47,9 @@ export function SplashScreen({ onDone }: SplashScreenProps) {
           style={{ boxShadow: "0 8px 40px rgba(34,197,94,0.5)" }}
         >
           <img
-            src="frontend/public/assets/generated/FamilyExpense Logo.png"
+            src="/assets/uploads/FamilyExpense-Logo-1.png"
             alt="FamilyExpense"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
         </motion.div>
 

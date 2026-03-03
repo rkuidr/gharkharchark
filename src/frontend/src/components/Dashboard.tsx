@@ -94,9 +94,9 @@ export function Dashboard({
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <img
-              src="/assets/generated/gharkharcha-logo.dim_128x128.png"
+              src="/assets/uploads/FamilyExpense-Logo-1.png"
               alt="FamilyExpense"
-              className="w-10 h-10 rounded-xl"
+              className="w-10 h-10 rounded-xl object-contain"
             />
             <div>
               <h1 className="text-white font-bold text-lg leading-tight">

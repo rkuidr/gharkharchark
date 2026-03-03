@@ -673,9 +673,9 @@ export function SettingsView({
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-card">
           <div className="flex items-center gap-3 mb-3">
             <img
-              src="/assets/generated/gharkharcha-logo.dim_128x128.png"
+              src="/assets/uploads/FamilyExpense-Logo-1.png"
               alt="FamilyExpense"
-              className="w-12 h-12 rounded-xl"
+              className="w-12 h-12 rounded-xl object-contain"
             />
             <div>
               <h3 className="text-gk-text dark:text-white font-bold">

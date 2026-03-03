@@ -42,9 +42,9 @@ export function WelcomeScreen({
           style={{ boxShadow: "0 8px 32px rgba(34,197,94,0.45)" }}
         >
           <img
-            src="/assets/generated/gharkharcha-logo.dim_128x128.png"
+            src="/assets/uploads/FamilyExpense-Logo-1.png"
             alt="FamilyExpense"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
         </motion.div>
 
