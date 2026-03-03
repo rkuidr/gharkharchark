@@ -47,7 +47,7 @@ export function SplashScreen({ onDone }: SplashScreenProps) {
           style={{ boxShadow: "0 8px 40px rgba(34,197,94,0.5)" }}
         >
           <img
-            src="/assets/generated/gharkharcha-logo.dim_128x128.png"
+            src="frontend/public/assets/generated/FamilyExpense Logo.png"
             alt="FamilyExpense"
             className="w-full h-full object-cover"
           />
