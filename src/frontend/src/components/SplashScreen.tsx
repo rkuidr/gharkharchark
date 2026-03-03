@@ -46,11 +46,7 @@ export function SplashScreen({ onDone }: SplashScreenProps) {
           className="w-24 h-24 rounded-2xl shadow-2xl overflow-hidden"
           style={{ boxShadow: "0 8px 40px rgba(34,197,94,0.5)" }}
         >
-          <img
-            src="/assets/uploads/FamilyExpense-Logo-1.png"
-            alt="FamilyExpense"
-            className="w-full h-full object-contain"
-          />
+          
         </motion.div>
 
         {/* App name */}
